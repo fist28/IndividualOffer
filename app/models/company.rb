@@ -16,5 +16,9 @@
 #
 
 class Company < ActiveRecord::Base
-  belongs_to :company
+  has_many :clients, :class_name => 'Company', :dependent => :destroy, :foreign_key => :company_id
+  belongs_to :parent, :class_name => 'Company', :foreign_key => :company_id
+
+
+  has_many :offers
 end

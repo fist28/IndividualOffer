@@ -11,4 +11,5 @@
 
 class Offer < ActiveRecord::Base
   belongs_to :company
+  has_many :product_offers
 end
