@@ -24,6 +24,5 @@ group :development, :test do
   gem 'spring'
 end
 
-group :asserts do
-  gem 'rails-assets-bootstrap'
-end
+gem 'rails-assets-bootstrap'
+gem 'rails-assets-jquery'
