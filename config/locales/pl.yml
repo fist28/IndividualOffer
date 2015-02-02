@@ -1,0 +1,7 @@
+pl:
+  navigation:
+    user:
+      edit: 'Edytuj profil'
+      signout: 'Wyloguj'
+    application:
+      dashboard: 'Dashboard'

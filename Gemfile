@@ -12,12 +12,14 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 
+
 group :development do
   gem 'pg'
   gem 'awesome_print'
   gem 'annotate'
-  gem "better_errors"
-  gem "binding_of_caller"
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'devise-i18n'
 end
 
 group :development, :test do
