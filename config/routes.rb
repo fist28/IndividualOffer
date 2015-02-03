@@ -34,6 +34,6 @@ Rails.application.routes.draw do
       get 'edit' => 'devise/registrations#edit', as: :edit_user_registration
     end
 
-    resource :company
+    resources :company
   end
 end
