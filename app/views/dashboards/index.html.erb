@@ -1,6 +1,6 @@
 <% title 'Dashboard' %>
 
-<p class="lead"><%= t('dashboard.choose_company') %></p>
+<p class="lead"><%= t('dashboard.choose_client') %></p>
 
 <table class="table table-hover">
   <thead>
@@ -12,8 +12,9 @@
     <% @selected_company.clients.each do |client| %>
         <tr>
           <td>
-            <%= link_to client.name, client %>
+            <%= link_to client.name, last_offer_path(client) %>
           </td>
+
         </tr>
     <% end %>
   </tbody>
