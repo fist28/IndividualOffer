@@ -5,3 +5,9 @@ pl:
       signout: 'Wyloguj'
     application:
       dashboard: 'Dashboard'
+
+  company:
+    name: 'Nazwa'
+  dashboard:
+    choose_company: 'Wybierz firmę'
+

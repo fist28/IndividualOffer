@@ -19,7 +19,7 @@ unless Company.any?
     c.city        = Faker::Address.city
     c.post_code   = Faker::Address.postcode
     c.description = Faker::Lorem.sentence
-    c.user_id     = User.first
+    c.user_id     = user.id
     c.contact     = "#{Faker::PhoneNumber.phone_number} - #{Faker::Name.first_name}"
   end
 

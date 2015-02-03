@@ -4,7 +4,7 @@
     <% end -%>
 
     <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-      <li role="presentation"><%= link_to "Sign up", new_registration_path(resource_name) %></li>
+      <li role="presentation"><%= link_to "Sign up", new_user_registration_path %></li>
     <% end -%>
 
     <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>

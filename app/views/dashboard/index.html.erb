@@ -1,2 +1,20 @@
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+<% title 'Dashboard' %>
+
+<p class="lead"><%= t('dashboard.choose_company') %></p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= t('company.name') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @selected_company.clients.each do |client| %>
+        <tr>
+          <td>
+            <%= link_to client.name, client %>
+          </td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
