@@ -3,8 +3,8 @@ class CreateProductOffers < ActiveRecord::Migration
     create_table :product_offers do |t|
       t.references :offer, null: false, index: true
       t.references :product, null: false, index: true
-      t.string :type, null: false
-      t.decimal :value, null: false
+      t.string :type
+      t.decimal :value
 
       t.timestamps null: false
     end

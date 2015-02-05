@@ -1,5 +1,6 @@
 class OffersController < Application::Base
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
+  before_action :client
 
   # GET /offers
   # GET /offers.json
@@ -25,14 +26,11 @@ class OffersController < Application::Base
   # POST /offers.json
   def create
     @offer = Offer.new(offer_params)
-
     respond_to do |format|
       if @offer.save
         format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
-        format.json { render :show, status: :created, location: @offer }
       else
         format.html { render :new }
-        format.json { render json: @offer.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,10 +41,8 @@ class OffersController < Application::Base
     respond_to do |format|
       if @offer.update(offer_params)
         format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @offer }
       else
         format.html { render :edit }
-        format.json { render json: @offer.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,7 +53,6 @@ class OffersController < Application::Base
     @offer.destroy
     respond_to do |format|
       format.html { redirect_to offers_url, notice: 'Offer was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -71,4 +66,6 @@ class OffersController < Application::Base
     def offer_params
       params[:offer]
     end
+
+
 end

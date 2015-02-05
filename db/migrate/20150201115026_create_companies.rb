@@ -1,8 +1,8 @@
 class CreateCompanies < ActiveRecord::Migration
   def change
     create_table :companies do |t|
-      t.string :name, null: false
-      t.integer :nip, :limit => 5
+      t.string :name
+      t.integer :nip, limit: 5
       t.string :address
       t.string :city
       t.integer :post_code

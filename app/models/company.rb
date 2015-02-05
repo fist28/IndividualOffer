@@ -3,7 +3,7 @@
 # Table name: companies
 #
 #  id          :integer          not null, primary key
-#  name        :string           not null
+#  name        :string
 #  nip         :integer
 #  address     :string
 #  city        :string
@@ -15,11 +15,18 @@
 #  updated_at  :datetime         not null
 #  user_id     :integer
 #
+# Indexes
+#
+#  index_companies_on_company_id  (company_id)
+#  index_companies_on_user_id     (user_id)
+#
 
 class Company < ActiveRecord::Base
+  belongs_to :user
   has_many :clients, :class_name => 'Company', :dependent => :destroy, :foreign_key => :company_id
   belongs_to :parent, :class_name => 'Company', :foreign_key => :company_id
 
+  has_many :categories
+  has_many :products
   has_many :offers
-  belongs_to :user
 end

@@ -1,0 +1,19 @@
+= simple_form_for @product do |f|
+  = f.error_notification
+  .row
+    .col-sm-5
+      = f.input :name
+      = f.input :price do
+        .input-group
+          = f.number_field :price, class: 'form-control'
+          %span{class: 'input-group-addon'}= t('currency')
+      = f.input :vat
+      = f.input :category_id, collection: @categories
+    .col-sm-7
+      = f.input :unit, collection: Product::UNIT.map {|p| [t("product.unit.#{p}"), p]}
+      = f.input :quantity_container, wrapper_html: {id: "package_container_unit"}
+      = f.input :volume_container
+      = f.input :volume_type, collection: Product::VOLUME_TYPE.map {|p| [p,p]}
+  .row
+    .form-actions
+      = f.button :submit

@@ -5,10 +5,15 @@
 #  id         :integer          not null, primary key
 #  offer_id   :integer          not null
 #  product_id :integer          not null
-#  type       :string           not null
-#  value      :decimal(, )      not null
+#  type       :string
+#  value      :decimal(, )
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_product_offers_on_offer_id    (offer_id)
+#  index_product_offers_on_product_id  (product_id)
 #
 
 class ProductOffer < ActiveRecord::Base

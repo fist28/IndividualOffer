@@ -1,16 +1,41 @@
 pl:
+  currency: zł
   navigation:
     user:
       edit: 'Edytuj profil'
       signout: 'Wyloguj'
     application:
       dashboard: 'Dashboard'
+      base_offer: 'Podstawowa oferta'
+      product: 'Produkty'
   company:
     name: 'Nazwa'
   dashboard:
     choose_client: 'Wybierz klienta'
   offert:
+    new_base_offer: "Nowa podstawowa oferta"
+    prodcts: 'Produkty'
     navigation:
       add_new: 'Dodaj nową ofertę'
       last_offerts: 'Aktualna oferta'
+  product:
+    unit:
+      pice_short: 'szt.'
+      pice : 'Sztuka'
+      package_short: 'op.'
+      package: 'Opakowanie'
+    index:
+      index: 'Produkty'
+      table:
+        brutto: 'Cena brutto'
+        action: 'Akcja'
+    new:
+      new: 'Nowy produkt'
+  title_universal_buttons:
+    show: 'Zobacz'
+    edit: 'Edytuj'
+    destroy: 'Usuń'
+  universal_alerts:
+    destroy: 'Czy na pewno chcesz to usunąć?'
+
 

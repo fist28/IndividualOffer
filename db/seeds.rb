@@ -36,6 +36,29 @@ unless Company.any?
       c.company_id  = master_company.id
     end
   end
+
+  p 'Create Product Categories'
+  master_company.categories.create!(name: 'Cat 1')
+  master_company.categories.create!(name: 'Cat 2')
+  master_company.categories.create!(name: 'Cat 3')
+  master_company.categories.create!(name: 'Cat 4')
+  master_company.categories.create!(name: 'Cat 5')
+
+  p 'Create products'
+  (1..10).each do |i|
+    master_company.products.create do |p|
+      unit = Product::UNIT.sample
+      p.name = Faker::App.name
+      p.unit = unit
+      p.price = rand * (50-10) + 10
+      p.volume_container = Random.rand(20)
+      p.volume_type = Product::VOLUME_TYPE.sample
+      p.quantity_container = Random.rand(20) if unit == 'package'
+      p.vat = 11
+      p.category = Category.find(master_company.categories.map(&:id).sample)
+    end
+  end
+
 end
 
 p '-- Seed stop --'

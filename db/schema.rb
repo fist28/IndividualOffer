@@ -11,19 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150201154244) do
+ActiveRecord::Schema.define(version: 20150204111712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       null: false
+    t.integer  "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name",                  null: false
+    t.string   "name"
     t.integer  "nip",         limit: 8
     t.string   "address"
     t.string   "city"
@@ -40,7 +41,7 @@ ActiveRecord::Schema.define(version: 20150201154244) do
   add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
 
   create_table "offers", force: :cascade do |t|
-    t.integer  "company_id", null: false
+    t.integer  "company_id"
     t.text     "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -51,8 +52,8 @@ ActiveRecord::Schema.define(version: 20150201154244) do
   create_table "product_offers", force: :cascade do |t|
     t.integer  "offer_id",   null: false
     t.integer  "product_id", null: false
-    t.string   "type",       null: false
-    t.decimal  "value",      null: false
+    t.string   "type"
+    t.decimal  "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -64,15 +65,18 @@ ActiveRecord::Schema.define(version: 20150201154244) do
     t.string   "name",                                                   null: false
     t.string   "unit",                                                   null: false
     t.integer  "quantity_container",                         default: 1
-    t.decimal  "volume_container",   precision: 8, scale: 2
-    t.decimal  "price",              precision: 8, scale: 2
+    t.decimal  "volume_container",   precision: 8, scale: 2,             null: false
+    t.string   "volume_type",                                            null: false
+    t.decimal  "price",              precision: 8, scale: 2,             null: false
     t.integer  "vat",                                                    null: false
-    t.integer  "category_id"
+    t.integer  "category_id",                                            null: false
+    t.integer  "company_id",                                             null: false
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
+  add_index "products", ["company_id"], name: "index_products_on_company_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -92,10 +96,12 @@ ActiveRecord::Schema.define(version: 20150201154244) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "categories", "companies"
   add_foreign_key "companies", "companies"
   add_foreign_key "companies", "users"
   add_foreign_key "offers", "companies"
   add_foreign_key "product_offers", "offers"
   add_foreign_key "product_offers", "products"
   add_foreign_key "products", "categories"
+  add_foreign_key "products", "companies"
 end

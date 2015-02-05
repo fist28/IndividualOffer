@@ -1,0 +1,14 @@
+pl:
+  simple_form:
+    labels:
+      product:
+        name: 'Nazwa'
+        unit: 'Jednostka miary'
+        quantity_container: 'Sztuk w opakowaniu'
+        volume_container: 'Pojemność'
+        price: 'Cena netto'
+        vat: 'VAT'
+        category_id: 'Kategoria'
+        volume_type: 'Jednostka'
+    error_notification:
+      default_message: 'Popraw formularz.'

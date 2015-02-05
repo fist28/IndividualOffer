@@ -20,6 +20,18 @@ class Application::Base < ApplicationController
     @selected_company = session[:selected_company]
   end
 
+  def client
+    @client ||= selected_company.clients.find_by(id: params[:client_id], company_id: selected_company)
+  end
+
+  def products
+    @products ||= selected_company.products
+  end
+
+  def categories
+    @categories ||= selected_company.categories
+  end
+
   private
 
   def default_url_options
