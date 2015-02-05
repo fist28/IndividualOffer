@@ -3,8 +3,8 @@
 # Table name: product_offers
 #
 #  id         :integer          not null, primary key
-#  offer_id   :integer          not null
-#  product_id :integer          not null
+#  offer_id   :integer
+#  product_id :integer
 #  type       :string
 #  value      :decimal(, )
 #  created_at :datetime         not null

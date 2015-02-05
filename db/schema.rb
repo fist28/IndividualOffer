@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20150204111712) do
   add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
 
   create_table "offers", force: :cascade do |t|
-    t.integer  "company_id"
+    t.integer  "company_id", null: false
     t.text     "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 20150204111712) do
   add_index "offers", ["company_id"], name: "index_offers_on_company_id", using: :btree
 
   create_table "product_offers", force: :cascade do |t|
-    t.integer  "offer_id",   null: false
-    t.integer  "product_id", null: false
+    t.integer  "offer_id"
+    t.integer  "product_id"
     t.string   "type"
     t.decimal  "value"
     t.datetime "created_at", null: false

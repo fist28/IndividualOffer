@@ -1,8 +1,8 @@
 class CreateProductOffers < ActiveRecord::Migration
   def change
     create_table :product_offers do |t|
-      t.references :offer, null: false, index: true
-      t.references :product, null: false, index: true
+      t.references :offer, index: true
+      t.references :product, index: true
       t.string :type
       t.decimal :value
 

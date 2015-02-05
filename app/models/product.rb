@@ -23,6 +23,7 @@
 
 class Product < ActiveRecord::Base
   belongs_to :category
+  has_many :offers, through: :product_offers
   has_many :product_offers
   belongs_to :company
   UNIT = %w(pice package).freeze

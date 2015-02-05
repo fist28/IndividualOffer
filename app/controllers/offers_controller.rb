@@ -1,6 +1,8 @@
 class OffersController < Application::Base
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
   before_action :client
+  before_action :products
+  before_action :categories
 
   # GET /offers
   # GET /offers.json
@@ -15,7 +17,7 @@ class OffersController < Application::Base
 
   # GET /offers/new
   def new
-    @offer = Offer.new
+    @offer = @selected_company.offers.new
   end
 
   # GET /offers/1/edit
@@ -25,7 +27,7 @@ class OffersController < Application::Base
   # POST /offers
   # POST /offers.json
   def create
-    @offer = Offer.new(offer_params)
+    @offer = @selected_company.offers.new(offer_params)
     respond_to do |format|
       if @offer.save
         format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
@@ -64,7 +66,7 @@ class OffersController < Application::Base
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def offer_params
-      params[:offer]
+      params.require(:offer).permit(:comment, product_ids: [])
     end
 
 

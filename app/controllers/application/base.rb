@@ -1,5 +1,6 @@
 class Application::Base < ApplicationController
   before_action :authenticate_user!
+  before_action :selected_company
 
   helper_method :current_user
 
