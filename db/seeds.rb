@@ -45,7 +45,7 @@ unless Company.any?
   master_company.categories.create!(name: 'Cat 5')
 
   p 'Create products'
-  (1..10).each do |i|
+  (1..50).each do |i|
     master_company.products.create do |p|
       unit = Product::UNIT.sample
       p.name = Faker::App.name

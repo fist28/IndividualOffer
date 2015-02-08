@@ -1,7 +1,6 @@
 = simple_form_for @offer do |f|
   = f.input :comment
-  %h3= t('offert.prodcts')
-  -#= f.simple_fields_for :product_offers do |p|
+  %h3= t('offer.prodcts')
   - @categories.each do |c|
     %p
       %strong= c.name
@@ -9,5 +8,6 @@
 
   .form-actions
   = f.button :submit
+  - content_for(:content_buttons) { f.button :submit, form: "edit_offer_#{@offer.id}" }
 
 

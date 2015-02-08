@@ -1,0 +1,36 @@
+= simple_form_for @offer, :url => url_for(:controller => 'clients/offers') do |f|
+  = f.input :comment
+  %h3= t('offer.prodcts')
+
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th
+          %th= t('simple_form.labels.product.name')
+          %th= t('simple_form.labels.product.price')
+          %th= t('simple_form.labels.product.vat')
+          %th= t('simple_form.labels.product_offers.value')
+          %th= t('simple_form.labels.product_offers.kind')
+    %tbody
+      - @products.group_by(&:category).sort.each do |category, category_products|
+        %tr
+          %td.success{colspan: 8}= category.name
+        - category_products.each do |product|
+          %tr{class: "product_#{product.id}"}
+            = f.simple_fields_for :product_offers do |product_offer|
+              %td
+              %td
+                = product_offer.association :product, as: :hidden, input_html: { value: product.id }
+                = product.name_with_parameters
+              %td= product.price_str
+              %td= product.vat_str
+              %td= product_offer.input :value, label: false
+              %td= product_offer.input :kind, collection: ProductOffer::KIND.map {|t| [t,t]}, label: false, default: 1
+              %td
+                %span.new_netto
+              %td
+                %span.new_brutto
+  .form-actions
+  = f.button :submit
+
+

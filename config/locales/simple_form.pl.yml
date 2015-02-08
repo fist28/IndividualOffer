@@ -10,5 +10,8 @@ pl:
         vat: 'VAT'
         category_id: 'Kategoria'
         volume_type: 'Jednostka'
+      product_offers:
+        value: 'Zmiana o'
+        kind: 'Rodzaj modyfikacji'
     error_notification:
       default_message: 'Popraw formularz.'

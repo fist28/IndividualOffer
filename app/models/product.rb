@@ -44,4 +44,24 @@ class Product < ActiveRecord::Base
     quantity = "#{quantity_container}#{I18n.t('product.unit.pice_short')} x " if unit == 'package'
     "#{quantity}#{volume_container}#{volume_type}"
   end
+
+  def name_with_parameters(separator = ', ')
+    "#{name}#{separator}#{parameters}"
+  end
+
+  def vat_str
+    "#{vat}%"
+  end
+
+  def price_str
+    currency_str(price)
+  end
+
+  def brutto_str
+    currency_str(brutto)
+  end
+
+  def currency_str(price)
+    "#{price}#{I18n.t('currency')}"
+  end
 end

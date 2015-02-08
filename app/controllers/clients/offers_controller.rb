@@ -1,4 +1,4 @@
-class OffersController < Application::Base
+class Clients::OffersController < Clients::Base
   before_action :set_offer, only: [:edit, :update, :destroy]
   before_action :client
   before_action :products
@@ -7,18 +7,19 @@ class OffersController < Application::Base
   # GET /offers
   # GET /offers.json
   def index
-    @offers = Offer.all
+   @offers = @client.offers
   end
 
   # GET /offers/1
   # GET /offers/1.json
   def show
-    @offer = Offer.includes(products: :category).find(params[:id])
+    @offer = @client.offers.includes(products: :category).find(params[:id])
   end
 
   # GET /offers/new
   def new
-    @offer = @selected_company.offers.new
+    @offer = @client.offers.new
+    @offer.product_offers.build
   end
 
   # GET /offers/1/edit
@@ -28,7 +29,7 @@ class OffersController < Application::Base
   # POST /offers
   # POST /offers.json
   def create
-    @offer = @selected_company.offers.new(offer_params)
+    @offer = @client.offers.new(offer_params)
     respond_to do |format|
       if @offer.save
         format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
@@ -62,13 +63,11 @@ class OffersController < Application::Base
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_offer
-      @offer = Offer.find(params[:id])
+      @offer = @client.offers.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def offer_params
-      params.require(:offer).permit(:comment, product_ids: [])
+      params.require(:offer).permit(:comment, product_offers_attributes: [:product_id, :value, :kind])
     end
-
-
 end

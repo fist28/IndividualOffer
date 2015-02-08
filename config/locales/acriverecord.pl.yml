@@ -169,9 +169,9 @@ pl:
     select:
       prompt: Proszę wybrać
     submit:
-      create: Utwórz %{model}
-      submit: Zapisz %{model}
-      update: Aktualizuj %{model}
+      create: Zapisz
+      submit: Zapisz
+      update: Aktualizuj
   number:
     currency:
       format:

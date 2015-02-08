@@ -25,6 +25,10 @@ class Application::Base < ApplicationController
     @client ||= selected_company.clients.find_by(id: params[:client_id], company_id: selected_company)
   end
 
+  def clients
+    @clients ||= selected_company.clients
+  end
+
   def products
     @products ||= selected_company.products
   end

@@ -2,40 +2,62 @@ pl:
   currency: zł
   navigation:
     user:
-      edit: 'Edytuj profil'
-      signout: 'Wyloguj'
+      edit: "Edytuj profil"
+      signout: "Wyloguj"
     application:
-      dashboard: 'Dashboard'
-      base_offer: 'Podstawowa oferta'
-      product: 'Produkty'
+      dashboard: "Dashboard"
+      base_offer: "Oferta bazowa"
+      product: "Produkty"
+      clients: "Klienci"
   company:
-    name: 'Nazwa'
-  dashboard:
-    choose_client: 'Wybierz klienta'
-  offert:
-    new_base_offer: "Nowa podstawowa oferta"
-    prodcts: 'Produkty'
+    name: "Nazwa"
+  client:
+    title:
+      index: "Klienci"
+      new: "Nowy klient"
     navigation:
-      add_new: 'Dodaj nową ofertę'
-      last_offerts: 'Aktualna oferta'
+      new: "Utwórz"
+  dashboard:
+    choose_client: "Wybierz klienta"
+  offer:
+    title:
+      show: "Oferta"
+      show_base: "Oferta bazowa"
+      new: "Nowa oferta dla klienta %{client}"
+      new_base: "Nowa bazowa oferta"
+      edit: "Edytowanie oferty"
+
+    prodcts: "Produkty"
+    navigation:
+      add_new: "Dodaj nową ofertę"
+      last_offer: "Aktualna oferta"
   product:
     unit:
-      pice_short: 'szt.'
-      pice : 'Sztuka'
-      package_short: 'op.'
-      package: 'Opakowanie'
+      pice_short: "szt."
+      pice : "Sztuka"
+      package_short: "op."
+      package: "Opakowanie"
     index:
-      index: 'Produkty'
+      index: "Produkty"
       table:
-        brutto: 'Cena brutto'
-        action: 'Akcja'
+        brutto: "Cena brutto"
+        action: "Akcja"
     new:
-      new: 'Nowy produkt'
+      new: "Nowy produkt"
   title_universal_buttons:
-    show: 'Zobacz'
-    edit: 'Edytuj'
-    destroy: 'Usuń'
+    show: "Zobacz"
+    edit: "Edytuj"
+    destroy: "Usuń"
+    save: "Zapisz"
   universal_alerts:
-    destroy: 'Czy na pewno chcesz to usunąć?'
+    destroy: "Czy na pewno chcesz to usunąć?"
+  universal_headers:
+    actions: "Akcje"
+
+  activerecord:
+    models:
+      offer:
+       one: "oferta"
+       other: "oferty"
 
 

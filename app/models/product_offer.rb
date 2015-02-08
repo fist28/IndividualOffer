@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  offer_id   :integer
 #  product_id :integer
-#  type       :string
+#  kind       :string
 #  value      :decimal(, )
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -19,4 +19,8 @@
 class ProductOffer < ActiveRecord::Base
   belongs_to :offer
   belongs_to :product
+  KIND = %w(percent constant).freeze
+  validates :kind, inclusion:  { in: KIND }
+
+
 end

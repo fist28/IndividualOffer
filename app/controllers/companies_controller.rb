@@ -1,4 +1,4 @@
-class CompaniesController < Application::Base
+class CompaniesController < CompaniesBase
   before_action :client
 
   def show

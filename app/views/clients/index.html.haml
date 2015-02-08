@@ -1,0 +1,32 @@
+- title t('client.title.index')
+- content_for(:content_buttons) do
+  = link_to t('client.navigation.new'), new_company_client_path, class: 'btn btn-default'
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th= t('company.name')
+      %th Ostatnia oferta
+      %th Pobierz PDF
+      %th= t('universal_headers.actions')
+
+  %tbody
+    - @clients.each do |client|
+      %tr
+        %td= link_to client.name, company_client_offers_path(client_id: client)
+        %td
+          - if client.offers.any?
+            = client.offers.last.updated_at
+          - else
+            = link_to t('offer.navigation.add_new'), new_company_client_offer_path(client_id: client), class: 'btn btn-default btn-xs'
+        %td
+          = link_to '#', class: 'btn btn-default btn-sm' do
+            %span.glyphicon.glyphicon-download{'aria-hidden' => true}
+        %td
+          .btn-group{role: 'group'}
+            = link_to company_client_path(id: client), class: 'btn btn-default', title: t('title_universal_buttons.show') do
+              %span.glyphicon.glyphicon-eye-open{ 'area-hidden' => true}
+            = link_to edit_company_client_path(id: client), class: 'btn btn-default', title: t('title_universal_buttons.edit') do
+              %span.glyphicon.glyphicon-pencil{ 'area-hidden' => true}
+            = link_to company_client_path(id: client), class: 'btn btn-default', title: t('title_universal_buttons.destroy'), method: :delete, data: { confirm: t('universal_alerts.destroy') } do
+              %span.glyphicon.glyphicon-trash.text-danger{ 'area-hidden' => true}
