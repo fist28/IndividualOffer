@@ -19,6 +19,9 @@
 .overflow_hidden {
   overflow: hidden;
 }
+.table tbody>tr>td{
+  vertical-align: middle;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */

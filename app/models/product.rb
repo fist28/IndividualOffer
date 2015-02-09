@@ -36,8 +36,22 @@ class Product < ActiveRecord::Base
 
   alias_attribute :netto, :price
 
-  def brutto
-    ((price * (100 + vat))/100).round(2)
+  def brutto(netto = nil)
+    netto = self.price if netto.nil?
+    ((netto * (100 + vat))/100).round(2)
+  end
+
+  def calculate_change_price(value, kind)
+    p value
+    case kind
+      when 'constant'
+        new_netto = price + value.to_f
+      when 'percent'
+        new_netto = (price * (100 + value.to_f)) / 100
+    end
+    new_brutto = brutto(new_netto)
+
+    [currency_str(new_netto.round(2)), currency_str(new_brutto.round(2))]
   end
 
   def parameters

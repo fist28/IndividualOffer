@@ -44,6 +44,12 @@ pl:
         action: "Akcja"
     new:
       new: "Nowy produkt"
+  product_offer:
+    new_netto: "Nowa cena netto"
+    new_brutto: "Nowa cena brutto"
+    kind:
+      percent: "Procent"
+      constant: "Stała wartość"
   title_universal_buttons:
     show: "Zobacz"
     edit: "Edytuj"

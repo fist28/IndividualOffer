@@ -14,6 +14,7 @@
 #                      root GET    /                                                                            devise/sessions#new
 #               application GET    /:user_id(.:format)                                                          dashboards#index {:user_id=>/([0-9]+)/}
 #    edit_user_registration GET    /:user_id/edit(.:format)                                                     devise/registrations#edit {:user_id=>/([0-9]+)/}
+#         product_calculate POST   /:user_id/products/:product_id/calculate(.:format)                           products#async_calculate_change_price {:user_id=>/([0-9]+)/}
 #                  products GET    /:user_id/products(.:format)                                                 products#index {:user_id=>/([0-9]+)/}
 #                           POST   /:user_id/products(.:format)                                                 products#create {:user_id=>/([0-9]+)/}
 #               new_product GET    /:user_id/products/new(.:format)                                             products#new {:user_id=>/([0-9]+)/}
@@ -67,7 +68,9 @@ Rails.application.routes.draw do
       get 'edit' => 'devise/registrations#edit', as: :edit_user_registration
     end
 
-    resources :products
+    resources :products do
+      post 'calculate' => 'products#async_calculate_change_price'
+    end
     resources :offers
 
     resources :companies, only: [:show] do

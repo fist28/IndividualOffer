@@ -46,9 +46,24 @@ class ProductsController < Application::Base
     end
   end
 
+  def async_calculate_change_price
+    respond_to do |format|
+      format.json do
+        product = @products.find(params[:product_id])
+        new_netto, new_brutto = product.calculate_change_price(params[:change_value], params[:change_kind])
+        request = { json: {status: :ok, new_netto: new_netto, new_brutto: new_brutto}, content_type: 'text/javascript' }
+        render request
+      end
+      format.any do
+        request = { json: {status: 400}, content_type: 'text/javascript' }
+        render request
+      end
+    end
+  end
+
   private
     def set_product
-      @product = Product.find(params[:id])
+      @product = @products.find(params[:id])
     end
 
     def product_params

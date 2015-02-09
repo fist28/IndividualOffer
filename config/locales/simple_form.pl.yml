@@ -11,7 +11,7 @@ pl:
         category_id: 'Kategoria'
         volume_type: 'Jednostka'
       product_offers:
-        value: 'Zmiana o'
+        value: 'Zmiana ceny o wartość'
         kind: 'Rodzaj modyfikacji'
     error_notification:
       default_message: 'Popraw formularz.'
