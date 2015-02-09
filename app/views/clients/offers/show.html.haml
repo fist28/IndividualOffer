@@ -1,0 +1,31 @@
+- title t('product_offer.show.title', client: @client.name )
+- content_for(:content_buttons) do
+  - link_to t('title_universal_buttons.edit'), edit_company_client_offer_path(client_id: @client, id: @offer), class: 'btn btn-default'
+
+- unless @offer.comment.blank?
+  .well.well-sm
+    = @offer.comment
+
+
+%table.table.table-striped
+  - @offer.product_offers.includes(product: :category).group_by{ |o| o.product.category }.sort.each do |category, category_offer_products|
+    %thead
+      %tr.success
+        %th{colspan: 5}= category.name
+      %tr
+        %th= t('simple_form.labels.product.name')
+        %th= t('simple_form.labels.product.unit')
+        %th= t('simple_form.labels.product.vat')
+        %th= t('simple_form.labels.product.price')
+        %th= t('product.index.table.brutto')
+
+    %tbody
+      - category_offer_products.each do |offer_product|
+      - product = offer_product.product
+        %tr
+          %td= "#{product.name} | #{product.parameters}"
+          %td= t("product.unit.#{product.unit}_short")
+          %td= "#{product.vat}%"
+          - client_netto, client_brutto = product.calculate_change_price(offer_product.value, offer_product.kind)
+          %td= client_netto
+          %td= client_brutto

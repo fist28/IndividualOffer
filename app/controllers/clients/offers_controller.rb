@@ -1,6 +1,6 @@
 class Clients::OffersController < Clients::Base
-  before_action :set_offer, only: [:edit, :update, :destroy]
   before_action :client
+  before_action :set_offer, only: [:edit, :update, :destroy]
   before_action :products
   before_action :categories
 
@@ -13,7 +13,7 @@ class Clients::OffersController < Clients::Base
   # GET /offers/1
   # GET /offers/1.json
   def show
-    @offer = @client.offers.includes(products: :category).find(params[:id])
+    @offer = @client.offers.includes(:product_offers, products: :category).find(params[:id])
   end
 
   # GET /offers/new
@@ -32,7 +32,7 @@ class Clients::OffersController < Clients::Base
     @offer = @client.offers.new(offer_params)
     respond_to do |format|
       if @offer.save
-        format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
+        format.html { redirect_to company_client_offer_path(client_id: @client, id: @offer), notice: 'Offer was successfully created.' }
       else
         format.html { render :new }
       end

@@ -42,7 +42,6 @@ class Product < ActiveRecord::Base
   end
 
   def calculate_change_price(value, kind)
-    p value
     case kind
       when 'constant'
         new_netto = price + value.to_f

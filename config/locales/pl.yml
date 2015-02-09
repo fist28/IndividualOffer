@@ -26,7 +26,6 @@ pl:
       new: "Nowa oferta dla klienta %{client}"
       new_base: "Nowa bazowa oferta"
       edit: "Edytowanie oferty"
-
     prodcts: "Produkty"
     navigation:
       add_new: "Dodaj nową ofertę"
@@ -50,6 +49,10 @@ pl:
     kind:
       percent: "Procent"
       constant: "Stała wartość"
+    show:
+      title: "Oferta dla %{client}"
+    edit:
+      title: "Edycja oferty dla %{client}"
   title_universal_buttons:
     show: "Zobacz"
     edit: "Edytuj"

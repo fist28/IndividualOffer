@@ -30,7 +30,7 @@ class Application::Base < ApplicationController
   end
 
   def products
-    @products ||= selected_company.products
+    @products ||= selected_company.products.includes(:category)
   end
 
   def categories
