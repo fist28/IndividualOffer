@@ -20,8 +20,11 @@
 class ProductOffer < ActiveRecord::Base
   belongs_to :offer
   belongs_to :product
+
   KIND = %w(percent constant).freeze
+
   validates :kind, inclusion:  { in: KIND }
+  validates :value, numericality: true
   validates :product_id, uniqueness: {scope: :offer_id}, presence: true
 
 end
