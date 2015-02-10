@@ -17,6 +17,12 @@ pl:
       new: "Nowy klient"
     navigation:
       new: "Utwórz"
+    index:
+      updated_time_ago: "Aktualizowana %{time} temu"
+      pdf: "PDF"
+      table:
+        offerts: "Oferty"
+        download_last_offer_pdf: "Pobierz ostatnią"
   dashboard:
     choose_client: "Wybierz klienta"
   offer:
@@ -58,6 +64,8 @@ pl:
     edit: "Edytuj"
     destroy: "Usuń"
     save: "Zapisz"
+    show_all: "Pokaż wszystkie"
+    show_last: "Pokaż ostatnią"
   universal_alerts:
     destroy: "Czy na pewno chcesz to usunąć?"
   universal_headers:

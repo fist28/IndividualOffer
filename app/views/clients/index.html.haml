@@ -6,8 +6,8 @@
   %thead
     %tr
       %th= t('company.name')
-      %th Ostatnia oferta
-      %th Pobierz PDF
+      %th= t('client.index.table.offerts')
+      %th.col-sm-1= t('client.index.table.download_last_offer_pdf')
       %th= t('universal_headers.actions')
 
   %tbody
@@ -16,12 +16,21 @@
         %td= link_to client.name, company_client_offers_path(client_id: client)
         %td
           - if client.offers.any?
-            = client.offers.last.updated_at
+            - last_offer = client.offers.last
+            = link_to t('title_universal_buttons.show_last'),
+              company_client_offer_path(client_id: client, id: last_offer),
+              title: t('client.index.updated_time_ago', time:  distance_of_time_in_words_to_now(last_offer.updated_at)),
+              class: 'btn btn-default btn-xs'
+            = link_to t('title_universal_buttons.show_all'),
+              company_client_offers_path(client_id: client),
+              class: 'btn btn-default btn-xs'
+
           - else
             = link_to t('offer.navigation.add_new'), new_company_client_offer_path(client_id: client), class: 'btn btn-default btn-xs'
         %td
           = link_to '#', class: 'btn btn-default btn-sm' do
             %span.glyphicon.glyphicon-download{'aria-hidden' => true}
+              %strong= t('client.index.pdf')
         %td
           .btn-group{role: 'group'}
             = link_to company_client_path(id: client), class: 'btn btn-default', title: t('title_universal_buttons.show') do
