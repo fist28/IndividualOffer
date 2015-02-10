@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20150204111712) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "product_offers", ["offer_id", "product_id"], name: "index_product_offers_on_offer_id_and_product_id", unique: true, using: :btree
   add_index "product_offers", ["offer_id"], name: "index_product_offers_on_offer_id", using: :btree
   add_index "product_offers", ["product_id"], name: "index_product_offers_on_product_id", using: :btree
 

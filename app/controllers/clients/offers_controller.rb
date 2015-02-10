@@ -4,30 +4,30 @@ class Clients::OffersController < Clients::Base
   before_action :products
   before_action :categories
 
-  # GET /offers
-  # GET /offers.json
   def index
    @offers = @client.offers
   end
 
-  # GET /offers/1
-  # GET /offers/1.json
   def show
     @offer = @client.offers.includes(:product_offers, products: :category).find(params[:id])
   end
 
-  # GET /offers/new
   def new
     @offer = @client.offers.new
-    @offer.product_offers.build
+    po = []
+    @products.map { |e| po << {product_id: e.id, offer_id: @offer.id}}
+    @offer.product_offers.build(po)
+    Rails.logger.ap @offer.product_offers
   end
 
-  # GET /offers/1/edit
   def edit
+    @offer = @client.offers.joins(product_offers: { product: :category }).find(params[:id])
+    # TODO optimization needs!
+    po = []
+    @products.where.not(id: @offer.products).map { |e| po << {product_id: e.id, offer_id: @offer.id}}
+    @offer.product_offers.build(po)
   end
 
-  # POST /offers
-  # POST /offers.json
   def create
     @offer = @client.offers.new(offer_params)
     respond_to do |format|
@@ -39,20 +39,16 @@ class Clients::OffersController < Clients::Base
     end
   end
 
-  # PATCH/PUT /offers/1
-  # PATCH/PUT /offers/1.json
   def update
     respond_to do |format|
       if @offer.update(offer_params)
-        format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
+        format.html { redirect_to company_client_offer_path(client_id: @client, id: @offer), notice: 'Offer was successfully updated.' }
       else
         format.html { render :edit }
       end
     end
   end
 
-  # DELETE /offers/1
-  # DELETE /offers/1.json
   def destroy
     @offer.destroy
     respond_to do |format|
@@ -60,16 +56,12 @@ class Clients::OffersController < Clients::Base
     end
   end
 
-
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_offer
-      @offer = @client.offers.find(params[:id])
-    end
+  def set_offer
+    @offer = @client.offers.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def offer_params
-      params.require(:offer).permit(:comment, product_offers_attributes: [:product_id, :value, :kind])
-    end
+  def offer_params
+    params.require(:offer).permit(:comment, product_offers_attributes: [:id, :product_id, :value, :kind, :_destroy])
+  end
 end

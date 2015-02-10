@@ -12,8 +12,9 @@
 #
 # Indexes
 #
-#  index_product_offers_on_offer_id    (offer_id)
-#  index_product_offers_on_product_id  (product_id)
+#  index_product_offers_on_offer_id                 (offer_id)
+#  index_product_offers_on_offer_id_and_product_id  (offer_id,product_id) UNIQUE
+#  index_product_offers_on_product_id               (product_id)
 #
 
 class ProductOffer < ActiveRecord::Base
@@ -21,6 +22,6 @@ class ProductOffer < ActiveRecord::Base
   belongs_to :product
   KIND = %w(percent constant).freeze
   validates :kind, inclusion:  { in: KIND }
-
+  validates :product_id, uniqueness: {scope: :offer_id}, presence: true
 
 end

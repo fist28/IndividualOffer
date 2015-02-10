@@ -1,3 +1,3 @@
 - title t('offer.title.new', client: @client.name)
 
-= render 'form'
+= render 'form', url: company_client_offers_path(client_id: @client)

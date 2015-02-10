@@ -10,5 +10,6 @@ class CreateProductOffers < ActiveRecord::Migration
     end
     add_foreign_key :product_offers, :offers
     add_foreign_key :product_offers, :products
+    add_index :product_offers, [:offer_id, :product_id], :unique => true
   end
 end

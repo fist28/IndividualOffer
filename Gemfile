@@ -18,10 +18,11 @@ group :development do
   gem 'pg'
   gem 'awesome_print'
   gem 'annotate'
-  gem 'better_errors'
-  gem 'binding_of_caller'
   gem 'devise-i18n'
   gem 'quiet_assets'
+  gem 'meta_request'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development, :test do

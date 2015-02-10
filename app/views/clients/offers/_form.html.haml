@@ -1,7 +1,8 @@
-= simple_form_for @offer, :url => url_for(:controller => 'clients/offers') do |f|
+= simple_form_for @offer, url: url do |f|
+  = render 'shared/error_message', object: f.object
   = f.input :comment
   %h3= t('offer.prodcts')
-
+  = @offer.class
   %table.table.table-striped.table-hover
     %thead
       %tr
@@ -15,27 +16,34 @@
           %th= t('product_offer.new_netto')
           %th= t('product_offer.new_brutto')
     %tbody
-      - @products.group_by(&:category).sort.each do |category, category_products|
+      - @offer.product_offers.group_by{ |o| o.product.category }.sort.each do |category, category_offer_products|
         %tr
           %td.success{colspan: 9}= category.name
-        - category_products.each do |product|
-          %tr{class: "product", 'data-url' => product_calculate_path(product) }
-            = f.simple_fields_for :product_offers do |product_offer|
-              %td
-              %td
-                = product_offer.association :product, as: :hidden, input_html: { value: product.id }
-                = product.name_with_parameters
-              %td= product.price_str
-              %td= product.brutto_str
-              %td.vat= product.vat_str
-              %td= product_offer.input :value, as: :decimal, label: false, wrapper: false,
-                input_html: {class: 'value', :data => {:product_id => product.id} }
-              %td= product_offer.input :kind, collection: ProductOffer::KIND.map {|t| [t("product_offer.kind.#{t}"),t]},
-                label: false, default: 1, wrapper: false, input_html: {class: 'kind', 'data-product-id'=>product.id}
-              %td
-                %span.new_netto= product.price_str
-              %td
-                %span.new_brutto= product.brutto_str
+        = f.simple_fields_for :product_offers, category_offer_products do |product_offer|
+          - product = product_offer.object.product
+          %tr{class: "product", 'data-url' => product_calculate_path(product_offer.object.product_id) }
+            %td
+              = product_offer.association :product, as: :hidden, input_html: { value: product.id }, wrapper: false
+              = product_offer.input :_destroy, as: :hidden, wrapper: false, input_html: { class: 'destroy' }
+            %td
+              = product.name_with_parameters
+            %td= product.price_str
+            %td= product.brutto_str
+            %td.vat= product.vat_str
+            %td= product_offer.input :value, as: :decimal, label: false, wrapper: false,
+              input_html: {class: 'value', :data => {:product_id => product.id} }
+            %td= product_offer.input :kind, collection: ProductOffer::KIND.map {|t| [t("product_offer.kind.#{t}"),t]},
+              label: false, default: 1, wrapper: false, input_html: {class: 'kind', 'data-product-id'=>product.id}
+            %td
+              %span.new_netto
+                - new_netto, new_brutto = if product_offer.object.value.blank?
+                  - [product.price_str, product. brutto_str]
+                - else
+                  - product.calculate_change_price(product_offer.object.value, product_offer.object.kind)
+                =  new_netto
+            %td
+              %span.new_brutto= new_brutto
+
   .form-actions
   = f.button :submit
 
