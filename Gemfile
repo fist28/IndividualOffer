@@ -23,6 +23,7 @@ group :development do
   gem 'meta_request'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'i18n_generators'
 end
 
 group :development, :test do
