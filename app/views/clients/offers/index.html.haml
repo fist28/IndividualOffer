@@ -1,0 +1,27 @@
+- title t('client.offer.index.title', client: @client.name)
+- content_for :content_buttons do
+  = link_to t('title_universal_buttons.create'), new_company_client_offer_path(client_id: @client), class: 'btn btn-default'
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= t('client.offer.index.table.created_at')
+      %th= t('client.offer.index.table.updated_at')
+      %th= t('client.offer.index.table.categories')
+      %th= t('client.offer.index.table.count_products')
+      %th= t('universal_headers.actions')
+  %tbody
+    - @offers.each do |offer|
+      %tr
+        %td= t('client.offer.index.table.time_ago', time: distance_of_time_in_words_to_now(offer.created_at))
+        %td= t('client.offer.index.table.time_ago', time: distance_of_time_in_words_to_now(offer.updated_at))
+        %td= offer.products.group_by {|p| p.category.name }.keys.join(", ")
+        %td= offer.products.count
+        %td
+          .btn-group{role: 'group'}
+            = link_to company_client_offer_path(client_id: @client, id: offer), class: 'btn btn-default', title: t('title_universal_buttons.show') do
+              %span.glyphicon.glyphicon-eye-open{ 'area-hidden' => true}
+            = link_to edit_company_client_offer_path(client_id: @client, id: offer), class: 'btn btn-default', title: t('title_universal_buttons.edit') do
+              %span.glyphicon.glyphicon-pencil{ 'area-hidden' => true}
+            = link_to company_client_offer_path(client_id: @client, id: offer), class: 'btn btn-default', title: t('title_universal_buttons.destroy'), method: :delete, data: { confirm: t('universal_alerts.destroy') } do
+              %span.glyphicon.glyphicon-trash.text-danger{ 'area-hidden' => true}

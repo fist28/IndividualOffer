@@ -14,18 +14,12 @@ class Clients::OffersController < Clients::Base
 
   def new
     @offer = @client.offers.new
-    po = []
-    @products.map { |e| po << {product_id: e.id, offer_id: @offer.id}}
-    @offer.product_offers.build(po)
-    Rails.logger.ap @offer.product_offers
+    build_new_product_offers
   end
 
   def edit
     @offer = @client.offers.joins(product_offers: { product: :category }).find(params[:id])
-    # TODO optimization needs!
-    po = []
-    @products.where.not(id: @offer.products).map { |e| po << {product_id: e.id, offer_id: @offer.id}}
-    @offer.product_offers.build(po)
+    build_update_product_offers
   end
 
   def create
@@ -34,6 +28,7 @@ class Clients::OffersController < Clients::Base
       if @offer.save
         format.html { redirect_to company_client_offer_path(client_id: @client, id: @offer), notice: 'Offer was successfully created.' }
       else
+        build_new_product_offers
         format.html { render :new }
       end
     end
@@ -44,6 +39,7 @@ class Clients::OffersController < Clients::Base
       if @offer.update(offer_params)
         format.html { redirect_to company_client_offer_path(client_id: @client, id: @offer), notice: 'Offer was successfully updated.' }
       else
+        build_update_product_offers
         format.html { render :edit }
       end
     end
@@ -52,11 +48,23 @@ class Clients::OffersController < Clients::Base
   def destroy
     @offer.destroy
     respond_to do |format|
-      format.html { redirect_to offers_url, notice: 'Offer was successfully destroyed.' }
+      format.html { redirect_to company_client_offers_path(client_id: @client), notice: 'Offer was successfully destroyed.' }
     end
   end
 
   private
+  def build_new_product_offers
+    po = []
+    @products.map { |e| po << {product_id: e.id, offer_id: @offer.id}}
+    @offer.product_offers.build(po)
+  end
+
+  def build_update_product_offers
+    po = []
+    @products.where.not(id: @offer.products).map { |e| po << {product_id: e.id, offer_id: @offer.id}}
+    @offer.product_offers.build(po)
+  end
+
   def set_offer
     @offer = @client.offers.find(params[:id])
   end

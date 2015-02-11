@@ -13,9 +13,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'simple_form'
 gem 'haml'
+gem 'pg'
 
 group :development do
-  gem 'pg'
   gem 'awesome_print'
   gem 'annotate'
   gem 'devise-i18n'
