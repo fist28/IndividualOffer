@@ -6,23 +6,33 @@ pl:
       signout: "Wyloguj"
     application:
       dashboard: "Dashboard"
-      base_offer: "Oferta bazowa"
       product: "Produkty"
       clients: "Klienci"
+      categories: "Kategorie"
   company:
     name: "Nazwa"
+  category:
+    none: "Brak kategorii"
+    navigation:
+      destroy: "Usuń kategorię"
+      destroy_alert: "Czy na pewno chcesz usunąć kategorię %{category}"
+      new: "Nowa kategoria"
   client:
     title:
       index: "Klienci"
       new: "Nowy klient"
     navigation:
       new: "Utwórz"
+      destroy: "Usuń klienta"
+      destroy_alert: "Czy na pewno chcesz usunąć klienta %{client}"
     index:
       updated_time_ago: "Aktualizowana %{time} temu"
       pdf: "PDF"
       table:
         offerts: "Oferty"
         download_last_offer_pdf: "Pobierz ostatnią"
+    edit:
+      title: "Edycja klienta %{client}"
     offer:
       index:
         title: "Oferty dla klienta %{client}"
@@ -32,7 +42,7 @@ pl:
           updated_at: "Aktualizowana"
           categories: "Kategorie"
           count_products: "Liczba produktów"
-
+      show_all: "Wszystkie oferty"
   dashboard:
     choose_client: "Wybierz klienta"
   offer:
@@ -47,6 +57,8 @@ pl:
       add_new: "Dodaj nową ofertę"
       last_offer: "Aktualna oferta"
   product:
+    netto: "Netto"
+    brutto: "Brutto"
     unit:
       pice_short: "szt."
       pice : "Sztuka"
@@ -90,7 +102,7 @@ pl:
   activerecord:
     models:
       category: category  #g
-      company: company  #g
+      company: "firmę"
       offer:
         one: "ofertę"
         other: "oferty"
@@ -101,21 +113,21 @@ pl:
     attributes:
       category:
         company: :activerecord.models.company  #g
-        name: name  #g
+        name: "Nazwa"
         products: products  #g
 
       company:
-        address: address  #g
+        address: "Adres"
         categories: categories  #g
-        city: city  #g
+        city: "Miasto"
         clients: clients  #g
-        contact: contact  #g
-        description: description  #g
-        name: name  #g
-        nip: nip  #g
+        contact: "Dane kontaktowe"
+        description: "Opis/Komentarz"
+        name: "Nazwa"
+        nip: "NIP"
         offers: offers  #g
         parent: :activerecord.models.parent  #g
-        post_code: post_code  #g
+        post_code: "Kod pocztowy"
         products: products  #g
         user: :activerecord.models.user  #g
 
@@ -130,7 +142,7 @@ pl:
         company: :activerecord.models.company  #g
         name: name  #g
         offers: offers  #g
-        price: price  #g
+        price: "Cena"
         product_offers: product_offers  #g
         quantity_container: quantity_container  #g
         unit: unit  #g

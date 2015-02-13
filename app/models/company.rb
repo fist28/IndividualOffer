@@ -23,10 +23,16 @@
 
 class Company < ActiveRecord::Base
   belongs_to :user
-  has_many :clients, :class_name => 'Company', :dependent => :destroy, :foreign_key => :company_id
-  belongs_to :parent, :class_name => 'Company', :foreign_key => :company_id
+  has_many :clients, class_name: 'Company', dependent: :destroy, foreign_key: :company_id
+  belongs_to :parent, class_name: 'Company', foreign_key: :company_id
 
-  has_many :categories
-  has_many :products
-  has_many :offers
+  has_many :categories, dependent: :destroy
+  has_many :products, dependent: :destroy
+  has_many :offers, dependent: :destroy
+
+  validates :name, :address, :city, :post_code, presence: true
+
+  def main?
+    !parent.nil?
+  end
 end

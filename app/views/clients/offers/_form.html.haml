@@ -16,9 +16,9 @@
           %th= t('product_offer.new_netto')
           %th= t('product_offer.new_brutto')
     %tbody
-      - @offer.product_offers.group_by{ |o| o.product.category }.sort.each do |category, category_offer_products|
+      - @offer.product_offers.group_by{ |o| o.product.category ? o.product.category.name : t('category.none') }.sort.each do |category, category_offer_products|
         %tr
-          %td.success{colspan: 9}= category.name
+          %td.success{colspan: 9}= category
         = f.simple_fields_for :product_offers, category_offer_products do |product_offer|
           - product = product_offer.object.product
           %tr{class: "product", 'data-url' => product_calculate_path(product_offer.object.product_id) }

@@ -10,6 +10,18 @@
 #
 
 class Category < ActiveRecord::Base
-  has_many :products
+  has_many :products, dependent: :nullify
   belongs_to :company
+
+  validates :company_id, :name, presence: true
+
+  def self.without_category
+    @without_category ||= Category.new("-", )
+  end
+
+  def to_s
+    name
+  end
+
+
 end

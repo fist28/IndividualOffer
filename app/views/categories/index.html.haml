@@ -1,0 +1,19 @@
+- title t('navigation.application.categories')
+- content_for :content_buttons do
+  = link_to t('title_universal_buttons.add'), new_category_path, class: 'btn btn-default'
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th.col-sm-10= t('activerecord.attributes.category.name')
+      %th.col-sm-2= t('universal_headers.actions')
+  %tbody
+    - @categories.each do |category|
+      %tr
+        %td= best_in_place category, :name, id: "category_#{category.id}"
+        %td
+          .btn-group{role: 'group'}
+            = link_to '#', onclick: "document.getElementById('category_#{category.id}').click()", class: 'btn btn-default', title: t('title_universal_buttons.edit') do
+              %span.glyphicon.glyphicon-pencil{ 'area-hidden' => true}
+            = link_to category_path(id: category), class: 'btn btn-default', title: t('category.navigation.destroy'), method: :delete, data: { confirm: t('category.navigation.destroy_alert', category: category ) } do
+              %span.glyphicon.glyphicon-trash.text-danger{ 'area-hidden' => true}

@@ -1,0 +1,19 @@
+= simple_form_for @client, url: url do |f|
+  = f.error_notification
+  .row
+    .col-sm-12
+    .col-sm-4
+      = f.input :name
+      = f.input :nip
+      = f.input :address
+      .row
+        .col-sm-7
+          = f.input :city
+        .col-sm-5
+          = f.input :post_code
+    .col-sm-8
+      = f.input :description
+      = f.input :contact
+  .row
+    .col-sm-12.form-actions
+      = f.button :submit

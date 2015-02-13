@@ -1,5 +1,8 @@
 pl:
   simple_form:
+    required:
+      text: "Wymagane"
+      mark: '*'
     labels:
       product:
         name: 'Nazwa'

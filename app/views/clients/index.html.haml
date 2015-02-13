@@ -18,7 +18,7 @@
           - if client.offers.any?
             - last_offer = client.offers.last
             = link_to t('title_universal_buttons.show_last'),
-              company_client_offer_path(client_id: client, id: last_offer),
+              company_client_path(id: client),
               title: t('client.index.updated_time_ago', time:  distance_of_time_in_words_to_now(last_offer.updated_at)),
               class: 'btn btn-default btn-xs'
             = link_to t('title_universal_buttons.show_all'),
@@ -28,14 +28,15 @@
           - else
             = link_to t('offer.navigation.add_new'), new_company_client_offer_path(client_id: client), class: 'btn btn-default btn-xs'
         %td
-          = link_to '#', class: 'btn btn-default btn-sm' do
-            %span.glyphicon.glyphicon-download{'aria-hidden' => true}
-              %strong= t('client.index.pdf')
+          - if client.offers.any?
+            = link_to '#', class: 'btn btn-default btn-sm' do
+              %span.glyphicon.glyphicon-download{'aria-hidden' => true}
+                %strong= t('client.index.pdf')
         %td
           .btn-group{role: 'group'}
             = link_to company_client_path(id: client), class: 'btn btn-default', title: t('title_universal_buttons.show') do
               %span.glyphicon.glyphicon-eye-open{ 'area-hidden' => true}
             = link_to edit_company_client_path(id: client), class: 'btn btn-default', title: t('title_universal_buttons.edit') do
               %span.glyphicon.glyphicon-pencil{ 'area-hidden' => true}
-            = link_to company_client_path(id: client), class: 'btn btn-default', title: t('title_universal_buttons.destroy'), method: :delete, data: { confirm: t('universal_alerts.destroy') } do
+            = link_to company_client_path(id: client), class: 'btn btn-default', title: t('client.navigation.destroy'), method: :delete, data: { confirm: t('client.navigation.destroy_alert', client: client.name) } do
               %span.glyphicon.glyphicon-trash.text-danger{ 'area-hidden' => true}

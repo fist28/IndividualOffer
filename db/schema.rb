@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20150204111712) do
     t.string   "volume_type",                                            null: false
     t.decimal  "price",              precision: 8, scale: 2,             null: false
     t.integer  "vat",                                                    null: false
-    t.integer  "category_id",                                            null: false
+    t.integer  "category_id"
     t.integer  "company_id",                                             null: false
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false

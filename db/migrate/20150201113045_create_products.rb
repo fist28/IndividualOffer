@@ -8,7 +8,7 @@ class CreateProducts < ActiveRecord::Migration
       t.string :volume_type, null: false
       t.decimal :price, precision: 8, scale: 2, null: false
       t.integer :vat, null: false
-      t.references :category, index: true, null: false
+      t.references :category, index: true
       t.references :company, index: true, null: false
 
       t.timestamps null: false

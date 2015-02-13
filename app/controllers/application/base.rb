@@ -22,7 +22,7 @@ class Application::Base < ApplicationController
   end
 
   def client
-    @client ||= selected_company.clients.find_by(id: params[:client_id], company_id: selected_company)
+    @client ||= selected_company.clients.find_by(id: params[:client_id] || params[:id], company_id: selected_company)
   end
 
   def clients

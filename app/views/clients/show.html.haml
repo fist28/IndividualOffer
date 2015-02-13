@@ -1,0 +1,43 @@
+- title @client.name
+- content_for :content_buttons do
+  .row.margin-bottom-3
+    = link_to t('title_universal_buttons.edit'), edit_company_client_path, class: 'btn btn-default'
+    = link_to t('title_universal_buttons.destroy'), company_client_path, class: 'btn btn-default', title: t('title_universal_buttons.destroy'), method: :delete, data: { confirm: t('universal_alerts.destroy') }
+  .row
+    - if @last_offer.nil?
+      = link_to t('offer.navigation.add_new'), new_company_client_offer_path(client_id: @client), class: 'btn btn-default'
+    - else
+      = link_to t('offer.navigation.last_offer'), company_client_offer_path(client_id: @client, id: @last_offer), class: 'btn btn-default'
+      = link_to t('client.offer.show_all'), company_client_offers_path(client_id: @client), class: 'btn btn-default'
+
+  -#TODO contnet buttons, edit/remove/actual_offer/offerts
+
+.row
+  .col-sm-4
+    %dl.dl-horizontal
+      %dt
+        = t('activerecord.attributes.company.name')
+      %dd
+        = @client.name
+      %dt
+        = t('activerecord.attributes.company.nip')
+      %dd
+        = @client.nip
+      %dt
+        = t('activerecord.attributes.company.address')
+      %dd
+        = @client.address
+        %br
+        = "#{@client.city}, #{@client.post_code}"
+  .col-sm-8
+    %dl.dl-horizontal
+      %dt
+        = t('activerecord.attributes.company.description')
+      %dd
+        = @client.description
+      %dt
+        = t('activerecord.attributes.company.contact')
+      %dd
+        = @client.contact
+
+

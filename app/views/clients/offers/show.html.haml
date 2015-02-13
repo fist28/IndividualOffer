@@ -8,10 +8,10 @@
 
 
 %table.table.table-striped
-  - @offer.product_offers.includes(product: :category).group_by{ |o| o.product.category }.sort.each do |category, category_offer_products|
+  - @offer.product_offers.includes(product: :category).group_by{ |o| o.product.category ? o.product.category.name : t('category.none') }.sort.each do |category, category_offer_products|
     %thead
       %tr.success
-        %th{colspan: 5}= category.name
+        %th{colspan: 5}= category
       %tr
         %th= t('simple_form.labels.product.name')
         %th= t('simple_form.labels.product.unit')

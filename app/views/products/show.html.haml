@@ -1,0 +1,97 @@
+- title @product.name
+
+.row
+  .col-sm-4
+    %dl.dl-horizontal
+      %dt
+        = t('simple_form.labels.product.name')
+      %dd
+        = @product.name_with_parameters
+      %dt
+        = t('product.netto')
+      %dd
+        = @product.netto_str
+      %dt
+        = t('product.brutto')
+      %dd
+        = @product.brutto_str
+      %dt
+        = t('simple_form.labels.product.vat')
+      %dd
+        = @product.vat_str
+      %dt
+        = t('simple_form.labels.product.category_id')
+      %dd
+        = @product.category
+
+  .col-sm-8
+    %dl.dl-horizontal
+      %dt
+        = t('simple_form.labels.product.unit')
+      %dd
+        = @product.unit
+      %dt
+        = t('simple_form.labels.product.quantity_container')
+      %dd
+        = @product.quantity_container
+      %dt
+        = t('simple_form.labels.product.volume_container')
+      %dd
+        = @product.volume_str
+.row
+  %table.table.table-hover
+    %thead
+      %tr
+        %th= t('company.name')
+        %th= t('client.index.table.offerts')
+        %th.col-sm-1= t('client.index.table.download_last_offer_pdf')
+        %th= t('universal_headers.actions')
+
+    %tbody
+      - @product.companies.each do |client|
+        %tr
+          %td= link_to client.name, company_client_offers_path(client_id: client)
+          %td
+            - if client.offers.any?
+              - last_offer = client.offers.last
+              = link_to t('title_universal_buttons.show_last'),
+                company_client_path(id: client),
+                title: t('client.index.updated_time_ago', time:  distance_of_time_in_words_to_now(last_offer.updated_at)),
+                class: 'btn btn-default btn-xs'
+              = link_to t('title_universal_buttons.show_all'),
+                company_client_offers_path(client_id: client),
+                class: 'btn btn-default btn-xs'
+
+            - else
+              = link_to t('offer.navigation.add_new'), new_company_client_offer_path(client_id: client), class: 'btn btn-default btn-xs'
+          %td
+            - if client.offers.any?
+              = link_to '#', class: 'btn btn-default btn-sm' do
+                %span.glyphicon.glyphicon-download{'aria-hidden' => true}
+                  %strong= t('client.index.pdf')
+          %td
+            .btn-group{role: 'group'}
+              = link_to company_client_path(id: client), class: 'btn btn-default', title: t('title_universal_buttons.show') do
+                %span.glyphicon.glyphicon-eye-open{ 'area-hidden' => true}
+              = link_to edit_company_client_path(id: client), class: 'btn btn-default', title: t('title_universal_buttons.edit') do
+                %span.glyphicon.glyphicon-pencil{ 'area-hidden' => true}
+              = link_to company_client_path(id: client), class: 'btn btn-default', title: t('client.navigation.destroy'), method: :delete, data: { confirm: t('client.navigation.destroy_alert', client: client.name) } do
+                %span.glyphicon.glyphicon-trash.text-danger{ 'area-hidden' => true}
+
+
+              -#  id                 :integer          not null, primary key
+-##  name               :string           not null
+-##  unit               :string           not null
+-##  quantity_container :integer          default("1")
+-##  volume_container   :decimal(8, 2)    not null
+-##  volume_type        :string           not null
+-##  price              :decimal(8, 2)    not null
+-##  vat                :integer          not null
+-##  category_id        :integer
+-##  company_id         :integer          not null
+-#
+-#
+-#<p id="notice"><%= notice %></p>
+-#
+-#<%= link_to 'Edit', edit_product_path(@product) %> |
+-#<%= link_to 'Back', products_path %>

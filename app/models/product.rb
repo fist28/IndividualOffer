@@ -10,7 +10,7 @@
 #  volume_type        :string           not null
 #  price              :decimal(8, 2)    not null
 #  vat                :integer          not null
-#  category_id        :integer          not null
+#  category_id        :integer
 #  company_id         :integer          not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
@@ -35,10 +35,13 @@ class Product < ActiveRecord::Base
   validates :price, :volume_container, numericality: { greater_than: 0 }
 
   alias_attribute :netto, :price
+  alias_attribute :netto_str, :price_str
+
+  before_save :check_quantity_container
 
   def brutto(netto = nil)
     netto = self.price if netto.nil?
-    ((netto * (100 + vat))/100).round(2)
+    ((netto * (100 + vat)) / 100).round(2)
   end
 
   def calculate_change_price(value, kind)
@@ -76,5 +79,20 @@ class Product < ActiveRecord::Base
 
   def currency_str(price)
     "#{price}#{I18n.t('currency')}"
+  end
+
+  def volume_str
+    "#{volume_container}#{volume_type}"
+  end
+
+  def to_s
+    name
+  end
+
+  private
+
+  def check_quantity_container
+    return unless unit == 'pice'
+    self.quantity_container = 1
   end
 end

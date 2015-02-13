@@ -1,4 +1,4 @@
-class Clients::OffersController < Clients::Base
+class Clients::OffersController < Application::Base
   before_action :client
   before_action :set_offer, only: [:edit, :update, :destroy]
   before_action :products

@@ -1,0 +1,6 @@
+- title t('category.navigation.new')
+
+= simple_form_for @category, html: { class: 'col-sm-4' } do |c|
+  = c.input :name
+
+  = c.button :submit

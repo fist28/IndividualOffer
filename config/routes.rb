@@ -23,14 +23,12 @@
 #                           PATCH  /:user_id/products/:id(.:format)                                             products#update {:user_id=>/([0-9]+)/}
 #                           PUT    /:user_id/products/:id(.:format)                                             products#update {:user_id=>/([0-9]+)/}
 #                           DELETE /:user_id/products/:id(.:format)                                             products#destroy {:user_id=>/([0-9]+)/}
-#                    offers GET    /:user_id/offers(.:format)                                                   offers#index {:user_id=>/([0-9]+)/}
-#                           POST   /:user_id/offers(.:format)                                                   offers#create {:user_id=>/([0-9]+)/}
-#                 new_offer GET    /:user_id/offers/new(.:format)                                               offers#new {:user_id=>/([0-9]+)/}
-#                edit_offer GET    /:user_id/offers/:id/edit(.:format)                                          offers#edit {:user_id=>/([0-9]+)/}
-#                     offer GET    /:user_id/offers/:id(.:format)                                               offers#show {:user_id=>/([0-9]+)/}
-#                           PATCH  /:user_id/offers/:id(.:format)                                               offers#update {:user_id=>/([0-9]+)/}
-#                           PUT    /:user_id/offers/:id(.:format)                                               offers#update {:user_id=>/([0-9]+)/}
-#                           DELETE /:user_id/offers/:id(.:format)                                               offers#destroy {:user_id=>/([0-9]+)/}
+#                categories GET    /:user_id/categories(.:format)                                               categories#index {:user_id=>/([0-9]+)/}
+#                           POST   /:user_id/categories(.:format)                                               categories#create {:user_id=>/([0-9]+)/}
+#                  category GET    /:user_id/categories/:id(.:format)                                           categories#show {:user_id=>/([0-9]+)/}
+#                           PATCH  /:user_id/categories/:id(.:format)                                           categories#update {:user_id=>/([0-9]+)/}
+#                           PUT    /:user_id/categories/:id(.:format)                                           categories#update {:user_id=>/([0-9]+)/}
+#                           DELETE /:user_id/categories/:id(.:format)                                           categories#destroy {:user_id=>/([0-9]+)/}
 #     company_client_offers GET    /:user_id/companies/:company_id/clients/:client_id/offers(.:format)          clients/offers#index {:user_id=>/([0-9]+)/}
 #                           POST   /:user_id/companies/:company_id/clients/:client_id/offers(.:format)          clients/offers#create {:user_id=>/([0-9]+)/}
 #  new_company_client_offer GET    /:user_id/companies/:company_id/clients/:client_id/offers/new(.:format)      clients/offers#new {:user_id=>/([0-9]+)/}
@@ -71,7 +69,7 @@ Rails.application.routes.draw do
     resources :products do
       post 'calculate' => 'products#async_calculate_change_price'
     end
-    resources :offers
+    resources :categories, except: [:edit]
 
     resources :companies, only: [:show] do
       resources :clients do

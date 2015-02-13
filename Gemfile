@@ -13,6 +13,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'simple_form'
 gem 'haml'
+gem 'best_in_place', '~> 3.0.1'
 gem 'pg'
 
 group :development do
