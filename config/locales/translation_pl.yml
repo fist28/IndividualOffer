@@ -11,8 +11,9 @@ pl:
       categories: "Kategorie"
   company:
     name: "Nazwa"
+    edit:
+      title: "Edycja danych firmy"
   category:
-    none: "Brak kategorii"
     navigation:
       destroy: "Usuń kategorię"
       destroy_alert: "Czy na pewno chcesz usunąć kategorię %{category}"
@@ -59,6 +60,7 @@ pl:
   product:
     netto: "Netto"
     brutto: "Brutto"
+    diff: "Rżnica wzgl. ceny bazowej"
     unit:
       pice_short: "szt."
       pice : "Sztuka"
@@ -71,6 +73,9 @@ pl:
         action: "Akcja"
     new:
       new: "Nowy produkt"
+    show:
+      blank_client_usage: "Żaden klient nie ma tego produktu w swojej ofercie"
+      client_usage: "Klienci z tym produktem"
     validations:
       product_offers_any: "aa"
   product_offer:

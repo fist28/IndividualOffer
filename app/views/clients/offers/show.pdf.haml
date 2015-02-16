@@ -1,0 +1,33 @@
+!!! 5
+%html
+  %head
+    %title= "Your Website"
+    %meta{charset: "utf-8"}
+    = wicked_pdf_stylesheet_link_tag 'application'
+  %body
+    .content
+      = render 'shared/main_company_info'
+      .row
+        .col-sm-12
+          %table.table.table-striped
+            - @offer.product_offers.includes(product: :category).group_by{ |o| o.product.category ? o.product.category.name : t('category.none') }.sort.each do |category, category_offer_products|
+              %thead
+                %tr.success
+                  %th{colspan: 5}= category
+                %tr
+                  %th= t('simple_form.labels.product.name')
+                  %th= t('simple_form.labels.product.unit')
+                  %th= t('simple_form.labels.product.vat')
+                  %th= t('simple_form.labels.product.price')
+                  %th= t('product.index.table.brutto')
+
+              %tbody
+                - category_offer_products.each do |offer_product|
+                - product = offer_product.product
+                  %tr{class: "#{product.id}"}
+                    %td= "#{product.name} | #{product.parameters}"
+                    %td= t("product.unit.#{product.unit}_short")
+                    %td= "#{product.vat}%"
+                    - client_netto, client_brutto = product.calculate_change_price(offer_product.value, offer_product.kind)
+                    %td= client_netto
+                    %td= client_brutto

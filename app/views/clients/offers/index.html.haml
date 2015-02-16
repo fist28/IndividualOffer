@@ -15,7 +15,7 @@
       %tr
         %td= t('client.offer.index.table.time_ago', time: distance_of_time_in_words_to_now(offer.created_at))
         %td= t('client.offer.index.table.time_ago', time: distance_of_time_in_words_to_now(offer.updated_at))
-        %td= offer.products.group_by {|p| p.category.name }.keys.join(", ")
+        %td= offer.products.group_by { |p| p.category ? p.category.name : "n/a" }.keys.join(", ")
         %td= offer.products.count
         %td
           .btn-group{role: 'group'}

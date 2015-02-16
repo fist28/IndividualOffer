@@ -44,7 +44,7 @@ class Product < ActiveRecord::Base
     ((netto * (100 + vat)) / 100).round(2)
   end
 
-  def calculate_change_price(value, kind)
+  def calculate_change_price(value, kind, show_currency = true)
     case kind
       when 'constant'
         new_netto = price + value.to_f
@@ -53,7 +53,11 @@ class Product < ActiveRecord::Base
     end
     new_brutto = brutto(new_netto)
 
-    [currency_str(new_netto.round(2)), currency_str(new_brutto.round(2))]
+    if show_currency
+      [currency_str(new_netto.round(2)), currency_str(new_brutto.round(2))]
+    else
+      [new_netto.round(2), new_brutto.round(2)]
+    end
   end
 
   def parameters

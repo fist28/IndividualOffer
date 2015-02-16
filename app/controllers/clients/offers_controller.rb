@@ -10,6 +10,15 @@ class Clients::OffersController < Application::Base
 
   def show
     @offer = @client.offers.includes(:product_offers, products: :category).find(params[:id])
+
+    respond_to do |format|
+      format.html do
+
+      end
+      format.pdf do
+        render :pdf    => "my_pdf_name.pdf"
+      end
+    end
   end
 
   def new

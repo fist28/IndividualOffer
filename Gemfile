@@ -15,6 +15,9 @@ gem 'simple_form'
 gem 'haml'
 gem 'best_in_place', '~> 3.0.1'
 gem 'pg'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
 
 group :development do
   gem 'awesome_print'
@@ -35,3 +38,4 @@ end
 
 gem 'rails-assets-bootstrap'
 gem 'rails-assets-jquery'
+gem 'rails-assets-wysihtml5x'

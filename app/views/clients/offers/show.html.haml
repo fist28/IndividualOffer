@@ -22,7 +22,7 @@
     %tbody
       - category_offer_products.each do |offer_product|
       - product = offer_product.product
-        %tr
+        %tr{class: "#{product.id}"}
           %td= "#{product.name} | #{product.parameters}"
           %td= t("product.unit.#{product.unit}_short")
           %td= "#{product.vat}%"

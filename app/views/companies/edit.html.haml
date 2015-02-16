@@ -1,0 +1,22 @@
+- title t('company.edit.title')
+
+= simple_form_for @selected_company do |f|
+  .row
+    .col-sm-5
+      = f.input :name
+      = f.input :nip
+      = f.input :address
+      .row
+        .col-sm-7
+          = f.input :city
+        .col-sm-5
+          = f.input :post_code
+    .col-sm-7
+      = f.input :description, input_html: { rows: 7 }
+      = f.input :contact, input_html: { rows: 2 }
+  .row.col-sm-12
+    = f.button :submit
+
+:javascript
+  new wysihtml5.Editor("company_description", { parserRules:  wysihtml5ParserRules });
+  new wysihtml5.Editor("company_contact", { parserRules:  wysihtml5ParserRules });

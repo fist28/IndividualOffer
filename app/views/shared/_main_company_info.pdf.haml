@@ -1,0 +1,15 @@
+.row.col-sm-12
+  %table.table.no-border
+    %tbody
+      %tr
+        %td.col-sm-6
+          %h1
+            = @selected_company.name
+          %p
+            = @selected_company.description.html_safe
+        %td.col-sm-6
+          = @selected_company.address
+          %br
+          = "#{@selected_company.city}, #{@selected_company.post_code}"
+          %br
+          = @selected_company.contact.html_safe

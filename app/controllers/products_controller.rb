@@ -8,6 +8,7 @@ class ProductsController < Application::Base
   end
 
   def show
+    @company_query =  Company.select('companies.name, companies.id, offers.id as offer_id, product_offers.value, product_offers.kind').joins(offers: :products).where('products.id = ? AND products.company_id = ?', @product, @selected_company)
   end
 
   def new
