@@ -1,0 +1,12 @@
+%ul.nav.navbar-nav.nav-pipe
+  %li.dropdown
+    = link_to company_path(comapny_id: @selected_company.id), class: 'dropdown-toggle', data: {toggle: 'dropdown'}, role: 'button', 'aira-expanded' => false do
+      = @selected_company.name
+      %span.caret
+    %ul.dropdown-menu{ role: "menu" }
+      - @companies.each do |company|
+        %li
+          = link_to company.name, company_path(id: company)
+      %li.divider
+      %li
+        = link_to t('company.new.title'), new_company_path

@@ -2,18 +2,19 @@
 #
 # Table name: companies
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  nip         :integer
-#  address     :string
-#  city        :string
-#  post_code   :integer
-#  description :text
-#  contact     :text
-#  company_id  :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  user_id     :integer
+#  id                  :integer          not null, primary key
+#  name                :string
+#  nip                 :integer
+#  address             :string
+#  address_second_line :string
+#  city                :string
+#  post_code           :integer
+#  description         :text
+#  contact             :text
+#  company_id          :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  user_id             :integer
 #
 # Indexes
 #
@@ -34,5 +35,9 @@ class Company < ActiveRecord::Base
 
   def main?
     !parent.nil?
+  end
+
+  def to_s
+    name
   end
 end

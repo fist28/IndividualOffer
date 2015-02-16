@@ -16,7 +16,7 @@ class Clients::OffersController < Application::Base
 
       end
       format.pdf do
-        render :pdf    => "my_pdf_name.pdf"
+        render :pdf => "#{client}", :footer => { :right => '[page]/[topage]' }
       end
     end
   end

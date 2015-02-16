@@ -3,6 +3,23 @@ class CompaniesController < Application::Base
 
   end
 
+  def new
+    @company = current_user.companies.new
+  end
+
+  def create
+    @company = current_user.companies.new(company_params)
+
+    respond_to do |format|
+      if @company.save
+        session[:selected_company] = @company.id
+        format.html { redirect_to products_path, notice: 'Company was successfully created.' }
+      else
+        format.html { render :new }
+      end
+    end
+  end
+
   def edit
 
   end
@@ -20,6 +37,6 @@ class CompaniesController < Application::Base
   private
 
   def company_params
-    params.require(:company).permit(:name, :nip, :address, :city ,:post_code, :description, :contact)
+    params.require(:company).permit(:name, :nip, :address, :address_second_line, :city ,:post_code, :description, :contact)
   end
 end

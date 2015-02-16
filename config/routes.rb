@@ -12,8 +12,9 @@
 #     new_user_registration GET    /signup(.:format)                                                            devise/registrations#new
 #         user_registration POST   /signup(.:format)                                                            devise/registrations#create
 #                      root GET    /                                                                            devise/sessions#new
-#               application GET    /:user_id(.:format)                                                          products#index {:user_id=>/([0-9]+)/}
+#               application GET    /:user_id(.:format)                                                          application#index {:user_id=>/([0-9]+)/}
 #    edit_user_registration GET    /:user_id/edit(.:format)                                                     devise/registrations#edit {:user_id=>/([0-9]+)/}
+#  update_user_registration PUT    /:user_id/update(.:format)                                                   devise/registrations#update {:user_id=>/([0-9]+)/}
 #         product_calculate POST   /:user_id/products/:product_id/calculate(.:format)                           products#async_calculate_change_price {:user_id=>/([0-9]+)/}
 #                  products GET    /:user_id/products(.:format)                                                 products#index {:user_id=>/([0-9]+)/}
 #                           POST   /:user_id/products(.:format)                                                 products#create {:user_id=>/([0-9]+)/}
@@ -46,8 +47,14 @@
 #                           PATCH  /:user_id/companies/:company_id/clients/:id(.:format)                        clients#update {:user_id=>/([0-9]+)/}
 #                           PUT    /:user_id/companies/:company_id/clients/:id(.:format)                        clients#update {:user_id=>/([0-9]+)/}
 #                           DELETE /:user_id/companies/:company_id/clients/:id(.:format)                        clients#destroy {:user_id=>/([0-9]+)/}
+#                 companies GET    /:user_id/companies(.:format)                                                companies#index {:user_id=>/([0-9]+)/}
+#                           POST   /:user_id/companies(.:format)                                                companies#create {:user_id=>/([0-9]+)/}
+#               new_company GET    /:user_id/companies/new(.:format)                                            companies#new {:user_id=>/([0-9]+)/}
 #              edit_company GET    /:user_id/companies/:id/edit(.:format)                                       companies#edit {:user_id=>/([0-9]+)/}
 #                   company GET    /:user_id/companies/:id(.:format)                                            companies#show {:user_id=>/([0-9]+)/}
+#                           PATCH  /:user_id/companies/:id(.:format)                                            companies#update {:user_id=>/([0-9]+)/}
+#                           PUT    /:user_id/companies/:id(.:format)                                            companies#update {:user_id=>/([0-9]+)/}
+#                           DELETE /:user_id/companies/:id(.:format)                                            companies#destroy {:user_id=>/([0-9]+)/}
 #
 
 Rails.application.routes.draw do
@@ -61,11 +68,12 @@ Rails.application.routes.draw do
   end
 
   scope ':user_id', user_id: /([0-9]+)/ do
-    root to: 'products#index', as: :application
+    root to: 'application#index', as: :application
 
     # Devise
     as :user do
-      get 'edit' => 'devise/registrations#edit', as: :edit_user_registration
+      get 'edit'    => 'devise/registrations#edit', as: :edit_user_registration
+      put 'update'  => 'devise/registrations#update', as: :update_user_registration
     end
 
     resources :products do
@@ -73,7 +81,7 @@ Rails.application.routes.draw do
     end
     resources :categories, except: [:edit]
 
-    resources :companies, only: [:show, :edit, :update] do
+    resources :companies do
       resources :clients do
         resources :offers, controller: 'clients/offers'
       end

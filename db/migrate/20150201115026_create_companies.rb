@@ -4,6 +4,7 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :name
       t.integer :nip, limit: 5
       t.string :address
+      t.string :address_second_line
       t.string :city
       t.integer :post_code
       t.text :description

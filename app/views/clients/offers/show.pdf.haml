@@ -4,7 +4,8 @@
     %title= "Your Website"
     %meta{charset: "utf-8"}
     = wicked_pdf_stylesheet_link_tag 'application'
-  %body
+    = wicked_pdf_javascript_include_tag "number_pages"
+  %body{ onload: 'number_pages' }
     .content
       = render 'shared/main_company_info'
       .row
@@ -31,3 +32,14 @@
                     - client_netto, client_brutto = product.calculate_change_price(offer_product.value, offer_product.kind)
                     %td= client_netto
                     %td= client_brutto
+      :javascript
+        function number_pages() {
+          var vars={};
+          var x=document.location.search.substring(1).split('&');
+          for(var i in x) {var z=x[i].split('=',2);vars[z[0]] = unescape(z[1]);}
+          var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
+          for(var i in x) {
+            var y = document.getElementsByClassName(x[i]);
+            for(var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
+          }
+        }

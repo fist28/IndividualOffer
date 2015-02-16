@@ -1,6 +1,7 @@
 class Application::Base < ApplicationController
   before_action :authenticate_user!
   before_action :selected_company
+  before_action :companies
 
   helper_method :current_user
 
@@ -13,12 +14,11 @@ class Application::Base < ApplicationController
   end
 
   def companies
-    @companies = current_user.companies
+    @companies ||= current_user.companies
   end
 
   def selected_company
-    session[:selected_company] = companies.first if companies
-    @selected_company = session[:selected_company]
+    @selected_company ||= current_user.companies.find_by(id: session[:selected_company])
   end
 
   def client

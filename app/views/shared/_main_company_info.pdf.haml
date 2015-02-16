@@ -9,6 +9,9 @@
             = @selected_company.description.html_safe
         %td.col-sm-6
           = @selected_company.address
+          - unless @selected_company.address_second_line.blank?
+            %br
+            = @selected_company.address_second_line
           %br
           = "#{@selected_company.city}, #{@selected_company.post_code}"
           %br

@@ -11,6 +11,8 @@ pl:
       categories: "Kategorie"
   company:
     name: "Nazwa"
+    new:
+      title: "Nowa firma"
     edit:
       title: "Edycja danych firmy"
   category:

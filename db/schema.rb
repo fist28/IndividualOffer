@@ -25,15 +25,16 @@ ActiveRecord::Schema.define(version: 20150204111712) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
-    t.integer  "nip",         limit: 8
+    t.integer  "nip",                 limit: 8
     t.string   "address"
+    t.string   "address_second_line"
     t.string   "city"
     t.integer  "post_code"
     t.text     "description"
     t.text     "contact"
     t.integer  "company_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "user_id"
   end
 
