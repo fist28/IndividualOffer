@@ -1,4 +1,6 @@
 class CompaniesController < Application::Base
+  before_action :company, only: [:edit, :show]
+
   def show
 
   end
@@ -12,8 +14,7 @@ class CompaniesController < Application::Base
 
     respond_to do |format|
       if @company.save
-        session[:selected_company] = @company.id
-        format.html { redirect_to products_path, notice: 'Company was successfully created.' }
+        format.html { redirect_to company_products_path(company_id: @company), notice: 'Company was successfully created.' }
       else
         format.html { render :new }
       end

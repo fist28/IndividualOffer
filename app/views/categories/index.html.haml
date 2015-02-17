@@ -1,6 +1,6 @@
 - title t('navigation.application.categories')
 - content_for :content_buttons do
-  = link_to t('title_universal_buttons.add'), new_category_path, class: 'btn btn-default'
+  = link_to t('title_universal_buttons.add'), new_company_category_path, class: 'btn btn-default'
 
 %table.table.table-striped
   %thead
@@ -15,5 +15,5 @@
           .btn-group{role: 'group'}
             = link_to '#', onclick: "document.getElementById('category_#{category.id}').click()", class: 'btn btn-default', title: t('title_universal_buttons.edit') do
               %span.glyphicon.glyphicon-pencil{ 'area-hidden' => true}
-            = link_to category_path(id: category), class: 'btn btn-default', title: t('category.navigation.destroy'), method: :delete, data: { confirm: t('category.navigation.destroy_alert', category: category ) } do
+            = link_to company_category_path(id: category), class: 'btn btn-default', title: t('category.navigation.destroy'), method: :delete, data: { confirm: t('category.navigation.destroy_alert', category: category ) } do
               %span.glyphicon.glyphicon-trash.text-danger{ 'area-hidden' => true}

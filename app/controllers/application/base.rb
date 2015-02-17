@@ -18,7 +18,13 @@ class Application::Base < ApplicationController
   end
 
   def selected_company
-    @selected_company ||= current_user.companies.find_by(id: session[:selected_company])
+    @selected_company = company || current_user.companies.find_by(id: session[:selected_company])
+  end
+
+  def company
+    @company ||= current_user.companies.find_by(id: params[:company_id] || params[:id])
+    session[:selected_company] = @company.id if @company && !@company.id.nil?
+    @company
   end
 
   def client

@@ -12,7 +12,10 @@ class ProductsController < Application::Base
   end
 
   def new
-    @product = Product.new
+    if @categories.blank?
+      redirect_to new_company_category_path(company_id: @selected_company), notice: t('category.notice.first_create_category')
+    end
+    @product = @selected_company.products.new
   end
 
   def edit

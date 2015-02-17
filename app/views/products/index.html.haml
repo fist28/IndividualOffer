@@ -1,4 +1,6 @@
 - title t('product.index.index')
+- content_for :content_buttons do
+  = link_to t('title_universal_buttons.add'), new_company_product_path, class: 'btn btn-default'
 
 %table.table.table-striped
   %thead
@@ -27,5 +29,3 @@
               %span.glyphicon.glyphicon-pencil{ 'area-hidden' => true}
             = link_to product, class: 'btn btn-default', title: t('title_universal_buttons.destroy'), method: :delete, data: { confirm: t('universal_alerts.destroy') } do
               %span.glyphicon.glyphicon-trash.text-danger{ 'area-hidden' => true}
-
-= link_to 'New Product', new_product_path

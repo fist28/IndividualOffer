@@ -20,6 +20,8 @@ pl:
       destroy: "Usuń kategorię"
       destroy_alert: "Czy na pewno chcesz usunąć kategorię %{category}"
       new: "Nowa kategoria"
+    notice:
+      first_create_category: "Zanim utworzysz produkt, stwórz przynajmniej jedną kategorię"
   client:
     title:
       index: "Klienci"

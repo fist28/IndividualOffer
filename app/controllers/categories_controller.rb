@@ -14,7 +14,7 @@ class CategoriesController < Application::Base
     category = selected_company.categories.new(category_params)
     respond_to do |format|
       if category.save
-        format.html { redirect_to categories_path, notice: 'Offer was successfully created.' }
+        format.html { redirect_to company_categories_path, notice: 'Offer was successfully created.' }
       else
         format.html { render :new }
       end
@@ -24,7 +24,7 @@ class CategoriesController < Application::Base
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to categories_path, notice: '' }
+        format.html { redirect_to company_categories_path, notice: '' }
         format.json { render nothing: true, status: :ok, content_type: "text/html" }
       else
         format.html { render :index }
@@ -35,7 +35,7 @@ class CategoriesController < Application::Base
   def destroy
     @category.destroy
     respond_to do |format|
-      format.html { redirect_to categories_path, notice: '' }
+      format.html { redirect_to company_categories_path, notice: '' }
     end
   end
 
