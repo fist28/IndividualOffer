@@ -11,10 +11,10 @@ class CategoriesController < Application::Base
   end
 
   def create
-    category = selected_company.categories.new(category_params)
+    @category = selected_company.categories.new(category_params)
     respond_to do |format|
-      if category.save
-        format.html { redirect_to company_categories_path, notice: 'Offer was successfully created.' }
+      if @category.save
+        format.html { redirect_to [:new, @selected_company, @category], notice: 'Offer was successfully created.' }
       else
         format.html { render :new }
       end

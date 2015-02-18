@@ -23,9 +23,9 @@
         %td= product.category.name.truncate(10) if product.category
         %td
           .btn-group{role: 'group'}
-            = link_to product, class: 'btn btn-default', title: t('title_universal_buttons.show') do
+            = link_to [@selected_company, product], class: 'btn btn-default', title: t('title_universal_buttons.show') do
               %span.glyphicon.glyphicon-eye-open{ 'area-hidden' => true}
-            = link_to edit_product_path(product), class: 'btn btn-default', title: t('title_universal_buttons.edit') do
+            = link_to [:edit, @selected_company, product], class: 'btn btn-default', title: t('title_universal_buttons.edit') do
               %span.glyphicon.glyphicon-pencil{ 'area-hidden' => true}
-            = link_to product, class: 'btn btn-default', title: t('title_universal_buttons.destroy'), method: :delete, data: { confirm: t('universal_alerts.destroy') } do
+            = link_to [@selected_company, product], class: 'btn btn-default', title: t('title_universal_buttons.destroy'), method: :delete, data: { confirm: t('universal_alerts.destroy') } do
               %span.glyphicon.glyphicon-trash.text-danger{ 'area-hidden' => true}

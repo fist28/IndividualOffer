@@ -26,7 +26,7 @@ class ProductsController < Application::Base
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to new_company_product_path, notice: 'Product was successfully created.' }
       else
         format.html { render :new }
       end
@@ -36,7 +36,7 @@ class ProductsController < Application::Base
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { redirect_to [@selected_company, @product], notice: 'Product was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -46,7 +46,7 @@ class ProductsController < Application::Base
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to company_product_path, notice: 'Product was successfully destroyed.' }
     end
   end
 

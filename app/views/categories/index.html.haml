@@ -10,7 +10,7 @@
   %tbody
     - @categories.each do |category|
       %tr
-        %td= best_in_place category, :name, id: "category_#{category.id}"
+        %td= best_in_place category, :name, id: "category_#{category.id}", path: company_category_path(id: category)
         %td
           .btn-group{role: 'group'}
             = link_to '#', onclick: "document.getElementById('category_#{category.id}').click()", class: 'btn btn-default', title: t('title_universal_buttons.edit') do

@@ -1,0 +1,10 @@
+- title t('company.index.title')
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= t('company.name')
+  %tbody
+    - @companies.each do |company|
+      %tr
+        %td= link_to company, company

@@ -1,6 +1,10 @@
 class CompaniesController < Application::Base
   before_action :company, only: [:edit, :show]
 
+  def index
+    @companies
+  end
+
   def show
 
   end
@@ -11,10 +15,9 @@ class CompaniesController < Application::Base
 
   def create
     @company = current_user.companies.new(company_params)
-
     respond_to do |format|
       if @company.save
-        format.html { redirect_to company_products_path(company_id: @company), notice: 'Company was successfully created.' }
+        format.html { redirect_to company_categories_path(company_id: @company), notice: 'Company was successfully created.' }
       else
         format.html { render :new }
       end

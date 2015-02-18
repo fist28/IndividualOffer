@@ -1,6 +1,9 @@
 - title t('product_offer.show.title', client: @client.name )
 - content_for(:content_buttons) do
-  - link_to t('title_universal_buttons.edit'), edit_company_client_offer_path(client_id: @client, id: @offer), class: 'btn btn-default'
+  = link_to t('title_universal_buttons.edit'), edit_company_client_offer_path(client_id: @client, id: @offer), class: 'btn btn-default'
+  = link_to company_client_offer_path(client_id: @client ,id: @offer, format: :pdf), class: 'btn btn-default', target: '_blank' do
+    %span.glyphicon.glyphicon-download{'aria-hidden' => true}
+      %strong= t('client.index.pdf')
 
 - unless @offer.comment.blank?
   .well.well-sm

@@ -15,6 +15,8 @@ pl:
       title: "Nowa firma"
     edit:
       title: "Edycja danych firmy"
+    index:
+      title: "Firmy"
   category:
     navigation:
       destroy: "Usuń kategorię"
@@ -131,7 +133,7 @@ pl:
         city: "Miasto"
         clients: clients  #g
         contact: "Dane kontaktowe"
-        description: "Opis/Komentarz"
+        description: "Opis firmy"
         name: "Nazwa"
         nip: "NIP"
         offers: offers  #g

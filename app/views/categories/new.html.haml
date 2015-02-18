@@ -1,5 +1,5 @@
 - title t('category.navigation.new')
 
-= simple_form_for @category, url: company_categories_path, html: { class: 'col-sm-4' } do |c|
+= simple_form_for [@company, @category], html: { class: 'col-sm-4' } do |c|
   = c.input :name, input_html: {autofocus: true}
   = c.button :submit

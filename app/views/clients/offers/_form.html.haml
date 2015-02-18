@@ -21,7 +21,7 @@
           %td.success{colspan: 9}= category
         = f.simple_fields_for :product_offers, category_offer_products do |product_offer|
           - product = product_offer.object.product
-          %tr{class: "product", 'data-url' => product_calculate_path(product_offer.object.product_id) }
+          %tr{class: "product", 'data-url' => company_product_calculate_path(product_id: product_offer.object.product_id) }
             %td
               = product_offer.association :product, as: :hidden, input_html: { value: product.id }, wrapper: false
               = product_offer.input :_destroy, as: :hidden, wrapper: false, input_html: { class: 'destroy' }

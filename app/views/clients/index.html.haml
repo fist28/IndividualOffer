@@ -29,7 +29,7 @@
             = link_to t('offer.navigation.add_new'), new_company_client_offer_path(client_id: client), class: 'btn btn-default btn-xs'
         %td
           - if client.offers.any?
-            = link_to company_client_offer_path(client_id: client ,id: last_offer, format: :pdf), class: 'btn btn-default btn-sm' do
+            = link_to company_client_offer_path(client_id: client ,id: last_offer, format: :pdf), class: 'btn btn-default btn-sm', target: '_blank' do
               %span.glyphicon.glyphicon-download{'aria-hidden' => true}
                 %strong= t('client.index.pdf')
         %td
