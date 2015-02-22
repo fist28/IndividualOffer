@@ -14,7 +14,7 @@ class CategoriesController < Application::Base
     @category = selected_company.categories.new(category_params)
     respond_to do |format|
       if @category.save
-        format.html { redirect_to [:new, @selected_company, @category], notice: 'Offer was successfully created.' }
+        format.html { redirect_to new_company_category_path(company_id: @selected_company), notice: 'Offer was successfully created.' }
       else
         format.html { render :new }
       end
