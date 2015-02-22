@@ -5,9 +5,12 @@
       = f.input :name
       = f.input :price do
         .input-group
-          = f.number_field :price, class: 'form-control'
+          = f.number_field :price, as: :decimal, class: 'form-control'
           %span{class: 'input-group-addon'}= t('currency')
-      = f.input :vat
+      = f.input :vat do
+        .input-group
+          = f.number_field :vat, as: :decimal, class: 'form-control'
+          %span{class: 'input-group-addon'} %
       = f.input :category_id, collection: @categories
     .col-sm-7
       = f.input :unit, collection: Product::UNIT.map {|p| [t("product.unit.#{p}"), p]}
